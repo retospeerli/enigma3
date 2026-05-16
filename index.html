@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enigma Bedienmaschine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="app">
+  <header class="topbar">
+    <div>
+      <h1>Enigma I</h1>
+      <p>Bedienmaschine mit Rotorwahl und Steckerbrett</p>
+    </div>
+
+    <button id="resetBtn" class="small">↻ Zurücksetzen</button>
+  </header>
+
+  <section class="machine">
+    <div class="case">
+
+      <section class="rotor-panel">
+        <div class="rotor-unit">
+          <label for="leftRotorSelect">Linke Walze</label>
+          <select id="leftRotorSelect"></select>
+          <button class="rotor-window" id="leftWindow">A</button>
+        </div>
+
+        <div class="rotor-unit">
+          <label for="middleRotorSelect">Mittlere Walze</label>
+          <select id="middleRotorSelect"></select>
+          <button class="rotor-window" id="middleWindow">A</button>
+        </div>
+
+        <div class="rotor-unit">
+          <label for="rightRotorSelect">Rechte Walze</label>
+          <select id="rightRotorSelect"></select>
+          <button class="rotor-window" id="rightWindow">A</button>
+        </div>
+      </section>
+
+      <section class="lampboard" id="lampboard"></section>
+
+      <section class="keyboard" id="keyboard"></section>
+
+      <section class="plugboard-wrap">
+        <div class="plugboard-head">
+          <h2>Steckerbrett</h2>
+          <p><span id="plugCount">0</span>/10 Verbindungen</p>
+        </div>
+
+        <svg id="plugSvg" class="plug-svg"></svg>
+        <section class="plugboard" id="plugboard"></section>
+      </section>
+
+    </div>
+  </section>
+
+  <section class="controls">
+    <section class="box">
+      <label for="inputText">Text zum Abtippen</label>
+      <textarea id="inputText" spellcheck="false" placeholder="Text eingeben..."></textarea>
+      <button id="playTextBtn">▶ Text abtippen lassen</button>
+    </section>
+
+    <section class="box">
+      <label for="outputText">Ausgabe</label>
+      <textarea id="outputText" spellcheck="false" readonly></textarea>
+      <button id="clearBtn" class="secondary">Ausgabe löschen</button>
+    </section>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
