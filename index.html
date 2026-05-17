@@ -12,57 +12,84 @@
   <header class="topbar">
     <div>
       <h1>Enigma I</h1>
-      <p>Bedienmaschine mit Rotorwahl und Steckerbrett</p>
+      <p>Historisch nachempfundene Bedienmaschine mit Rotorwahl und Steckerbrett</p>
     </div>
 
     <button id="resetBtn" class="small">↻ Zurücksetzen</button>
   </header>
 
   <section class="machine">
-    <div class="case">
+    <div class="wood-case">
+      <div class="metal-face">
 
-      <section class="rotor-panel">
-        <div class="rotor-unit">
-          <label for="leftRotorSelect">Linke Walze</label>
-          <select id="leftRotorSelect"></select>
-          <button class="rotor-window" id="leftWindow">A</button>
-        </div>
+        <section class="top-machine-panel">
+          <div class="left-plate">
+            <div class="hinge"></div>
+          </div>
 
-        <div class="rotor-unit">
-          <label for="middleRotorSelect">Mittlere Walze</label>
-          <select id="middleRotorSelect"></select>
-          <button class="rotor-window" id="middleWindow">A</button>
-        </div>
+          <div class="logo">ENIGMA</div>
 
-        <div class="rotor-unit">
-          <label for="rightRotorSelect">Rechte Walze</label>
-          <select id="rightRotorSelect"></select>
-          <button class="rotor-window" id="rightWindow">A</button>
-        </div>
-      </section>
+          <section class="rotor-panel">
+            <div class="rotor-unit">
+              <label for="leftRotorSelect">Walze links</label>
+              <select id="leftRotorSelect"></select>
+              <button class="rotor-window" id="leftWindow">A</button>
+            </div>
 
-      <section class="lampboard" id="lampboard"></section>
+            <div class="rotor-unit">
+              <label for="middleRotorSelect">Walze Mitte</label>
+              <select id="middleRotorSelect"></select>
+              <button class="rotor-window" id="middleWindow">A</button>
+            </div>
 
-      <section class="keyboard" id="keyboard"></section>
+            <div class="rotor-unit">
+              <label for="rightRotorSelect">Walze rechts</label>
+              <select id="rightRotorSelect"></select>
+              <button class="rotor-window" id="rightWindow">A</button>
+            </div>
 
-      <section class="plugboard-wrap">
-        <div class="plugboard-head">
-          <h2>Steckerbrett</h2>
-          <p><span id="plugCount">0</span>/10 Verbindungen</p>
-        </div>
+            <div class="rotor-unit reflector-unit">
+              <label>Umkehrwalze</label>
+              <button class="reflector-window" id="reflectorWindow">UKW B</button>
+            </div>
+          </section>
 
-        <svg id="plugSvg" class="plug-svg"></svg>
-        <section class="plugboard" id="plugboard"></section>
-      </section>
+          <div class="note-plate">
+            Zum Betrieb<br>
+            Walzen wählen<br>
+            Startstellung<br>
+            einstellen
+          </div>
 
+          <div class="screws">
+            <span></span><span></span>
+            <span></span><span></span>
+          </div>
+        </section>
+
+        <section class="lampboard" id="lampboard"></section>
+
+        <section class="keyboard" id="keyboard"></section>
+
+        <section class="plugboard-wrap">
+          <div class="plugboard-head">
+            <h2>Steckerbrett</h2>
+            <p><span id="plugCount">0</span>/10 Verbindungen</p>
+          </div>
+
+          <svg id="plugSvg" class="plug-svg"></svg>
+          <section class="plugboard" id="plugboard"></section>
+        </section>
+
+      </div>
     </div>
   </section>
 
   <section class="controls">
     <section class="box">
-      <label for="inputText">Text zum Abtippen</label>
-      <textarea id="inputText" spellcheck="false" placeholder="Text eingeben..."></textarea>
-      <button id="playTextBtn">▶ Text abtippen lassen</button>
+      <label for="inputText">Text vorbereiten</label>
+      <textarea id="inputText" spellcheck="false" placeholder="Text hier fertig eintippen..."></textarea>
+      <button id="playTextBtn">▶ Nachricht senden</button>
     </section>
 
     <section class="box">
