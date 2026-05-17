@@ -1,6 +1,12 @@
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LETTERS = ALPHABET.split("");
 
+const KEY_ROWS = [
+  "QWERTZUIO",
+  "ASDFGHJK",
+  "PYXCVBNML"
+];
+
 const ROTORS = {
   I:    { wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", notch: "Q" },
   II:   { wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE", notch: "E" },
@@ -12,7 +18,11 @@ const ROTORS = {
   VIII: { wiring: "FKQHTLXOCBJSPDZRAMEWNIUYGV", notch: "ZM" }
 };
 
-const REFLECTOR_B = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+const REFLECTORS = {
+  "UKW A": "EJMZALYXVBWFCRQUONTSPIKHGD",
+  "UKW B": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+  "UKW C": "FVPJIAOYEDRZXWGCTKUQSBNMHL"
+};
 
 const CABLE_COLORS = [
   "#ffc247", "#62d89a", "#7db8ff", "#ff8bd1", "#c6ff6b",
@@ -30,6 +40,7 @@ const rightRotorSelect = document.getElementById("rightRotorSelect");
 const leftWindow = document.getElementById("leftWindow");
 const middleWindow = document.getElementById("middleWindow");
 const rightWindow = document.getElementById("rightWindow");
+const reflectorWindow = document.getElementById("reflectorWindow");
 
 const lampboard = document.getElementById("lampboard");
 const keyboard = document.getElementById("keyboard");
@@ -47,6 +58,7 @@ const resetBtn = document.getElementById("resetBtn");
 let leftPos = 0;
 let middlePos = 0;
 let rightPos = 0;
+let reflectorName = "UKW B";
 
 let selectedPlug = null;
 let plugPairs = [];
@@ -75,27 +87,44 @@ function fillRotorSelect(select, defaultValue) {
   select.value = defaultValue;
 }
 
+function buildRows(container, rows, itemBuilder) {
+  rows.forEach((row, index) => {
+    const rowEl = document.createElement("div");
+    rowEl.className = `row row-${index + 1}`;
+
+    row.split("").forEach(letter => {
+      rowEl.appendChild(itemBuilder(letter));
+    });
+
+    container.appendChild(rowEl);
+  });
+}
+
 function buildMachine() {
   fillRotorSelect(leftRotorSelect, "I");
   fillRotorSelect(middleRotorSelect, "II");
   fillRotorSelect(rightRotorSelect, "III");
 
-  LETTERS.forEach(letter => {
+  buildRows(lampboard, KEY_ROWS, letter => {
     const lamp = document.createElement("div");
     lamp.className = "lamp";
     lamp.textContent = letter;
     lamp.dataset.letter = letter;
-    lampboard.appendChild(lamp);
     lampNodes[letter] = lamp;
+    return lamp;
+  });
 
+  buildRows(keyboard, KEY_ROWS, letter => {
     const key = document.createElement("button");
     key.className = "key";
     key.textContent = letter;
     key.dataset.letter = letter;
     key.addEventListener("click", () => pressLetter(letter));
-    keyboard.appendChild(key);
     keyNodes[letter] = key;
+    return key;
+  });
 
+  LETTERS.forEach(letter => {
     const plug = document.createElement("button");
     plug.className = "plug";
     plug.textContent = letter;
@@ -114,7 +143,21 @@ function buildMachine() {
     });
   });
 
+  reflectorWindow.addEventListener("click", cycleReflector);
+
   updateWindows();
+  updateReflectorWindow();
+}
+
+function cycleReflector() {
+  const names = Object.keys(REFLECTORS);
+  const currentIndex = names.indexOf(reflectorName);
+  reflectorName = names[(currentIndex + 1) % names.length];
+  updateReflectorWindow();
+}
+
+function updateReflectorWindow() {
+  reflectorWindow.textContent = reflectorName;
 }
 
 function updateWindows() {
@@ -193,7 +236,7 @@ function encodeLetter(letter) {
   i = rotorForward(i, cfg.middle.wiring, middlePos);
   i = rotorForward(i, cfg.left.wiring, leftPos);
 
-  i = indexOf(REFLECTOR_B[i]);
+  i = indexOf(REFLECTORS[reflectorName][i]);
 
   i = rotorBackward(i, cfg.left.wiring, leftPos);
   i = rotorBackward(i, cfg.middle.wiring, middlePos);
@@ -261,6 +304,7 @@ function setControlsDisabled(disabled) {
   leftRotorSelect.disabled = disabled;
   middleRotorSelect.disabled = disabled;
   rightRotorSelect.disabled = disabled;
+  reflectorWindow.disabled = disabled;
 
   Object.values(keyNodes).forEach(node => node.disabled = disabled);
   Object.values(plugNodes).forEach(node => node.disabled = disabled);
@@ -376,14 +420,27 @@ function resetAll() {
   leftRotorSelect.value = "I";
   middleRotorSelect.value = "II";
   rightRotorSelect.value = "III";
+  reflectorName = "UKW B";
 
   resetPositions();
+  updateReflectorWindow();
   renderPlugboard();
 }
 
 window.addEventListener("resize", drawCables);
 
 document.addEventListener("keydown", event => {
+  const active = document.activeElement;
+  const isTypingField =
+    active &&
+    (
+      active.tagName === "TEXTAREA" ||
+      active.tagName === "INPUT" ||
+      active.tagName === "SELECT"
+    );
+
+  if (isTypingField) return;
+
   const key = event.key.toUpperCase();
 
   if (LETTERS.includes(key)) {
