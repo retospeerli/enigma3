@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Enigma Bedienmaschine</title>
+  <title>Enigma I</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,75 +12,78 @@
   <header class="topbar">
     <div>
       <h1>Enigma I</h1>
-      <p>Historisch nachempfundene Bedienmaschine mit Rotorwahl und Steckerbrett</p>
+      <p>Bedienmaschine mit Rotorwahl, Umkehrwalze und Steckerbrett</p>
     </div>
-
     <button id="resetBtn" class="small">↻ Zurücksetzen</button>
   </header>
 
   <section class="machine">
-    <div class="wood-case">
-      <div class="metal-face">
+    <div class="enigma-case">
+      <div class="lid-shadow"></div>
 
-        <section class="top-machine-panel">
-          <div class="left-plate">
-            <div class="hinge"></div>
+      <div class="machine-face">
+        <section class="upper-panel">
+          <div class="left-hardware">
+            <div class="metal-strap"></div>
+            <div class="metal-slot"></div>
           </div>
 
-          <div class="logo">ENIGMA</div>
+          <div class="brand">ENIGMA</div>
 
-          <section class="rotor-panel">
+          <div class="rotor-area">
             <div class="rotor-unit">
-              <label for="leftRotorSelect">Walze links</label>
+              <label for="leftRotorSelect">Links</label>
               <select id="leftRotorSelect"></select>
               <button class="rotor-window" id="leftWindow">A</button>
             </div>
 
             <div class="rotor-unit">
-              <label for="middleRotorSelect">Walze Mitte</label>
+              <label for="middleRotorSelect">Mitte</label>
               <select id="middleRotorSelect"></select>
               <button class="rotor-window" id="middleWindow">A</button>
             </div>
 
             <div class="rotor-unit">
-              <label for="rightRotorSelect">Walze rechts</label>
+              <label for="rightRotorSelect">Rechts</label>
               <select id="rightRotorSelect"></select>
               <button class="rotor-window" id="rightWindow">A</button>
             </div>
 
-            <div class="rotor-unit reflector-unit">
+            <div class="rotor-unit">
               <label>Umkehrwalze</label>
               <button class="reflector-window" id="reflectorWindow">UKW B</button>
             </div>
-          </section>
-
-          <div class="note-plate">
-            Zum Betrieb<br>
-            Walzen wählen<br>
-            Startstellung<br>
-            einstellen
           </div>
 
-          <div class="screws">
-            <span></span><span></span>
-            <span></span><span></span>
+          <div class="note-card">
+            <strong>Walzen</strong><br>
+            einstellen<br>
+            Stecker<br>
+            verbinden
           </div>
+
+          <div class="screw s1"></div>
+          <div class="screw s2"></div>
+          <div class="screw s3"></div>
+          <div class="screw s4"></div>
         </section>
 
-        <section class="lampboard" id="lampboard"></section>
+        <section class="lamp-section">
+          <div id="lampboard" class="lampboard"></div>
+        </section>
 
-        <section class="keyboard" id="keyboard"></section>
+        <section class="key-section">
+          <div id="keyboard" class="keyboard"></div>
+        </section>
 
         <section class="plugboard-wrap">
           <div class="plugboard-head">
             <h2>Steckerbrett</h2>
             <p><span id="plugCount">0</span>/10 Verbindungen</p>
           </div>
-
           <svg id="plugSvg" class="plug-svg"></svg>
           <section class="plugboard" id="plugboard"></section>
         </section>
-
       </div>
     </div>
   </section>
@@ -98,7 +101,6 @@
       <button id="clearBtn" class="secondary">Ausgabe löschen</button>
     </section>
   </section>
-
 </main>
 
 <script src="app.js"></script>
