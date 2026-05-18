@@ -55,6 +55,10 @@ const playTextBtn = document.getElementById("playTextBtn");
 const clearBtn = document.getElementById("clearBtn");
 const resetBtn = document.getElementById("resetBtn");
 
+const helpBtn = document.getElementById("helpBtn");
+const helpModal = document.getElementById("helpModal");
+const closeHelpBtn = document.getElementById("closeHelpBtn");
+
 let leftPos = 0;
 let middlePos = 0;
 let rightPos = 0;
@@ -456,6 +460,14 @@ inputText.addEventListener("input", () => {
 playTextBtn.addEventListener("click", playInputText);
 clearBtn.addEventListener("click", clearOutput);
 resetBtn.addEventListener("click", resetAll);
+
+helpBtn.addEventListener("click", () => {
+  helpModal.classList.remove("hidden");
+});
+
+closeHelpBtn.addEventListener("click", () => {
+  helpModal.classList.add("hidden");
+});
 
 [leftRotorSelect, middleRotorSelect, rightRotorSelect].forEach(select => {
   select.addEventListener("change", resetPositions);
