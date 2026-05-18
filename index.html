@@ -14,7 +14,11 @@
       <h1>Enigma I</h1>
       <p>Bedienmaschine mit Rotorwahl, Umkehrwalze und Steckerbrett</p>
     </div>
-    <button id="resetBtn" class="small">↻ Zurücksetzen</button>
+
+    <div class="top-buttons">
+      <button id="helpBtn" class="help-button">?</button>
+      <button id="resetBtn" class="small">↻ Zurücksetzen</button>
+    </div>
   </header>
 
   <section class="machine">
@@ -101,6 +105,40 @@
       <button id="clearBtn" class="secondary">Ausgabe löschen</button>
     </section>
   </section>
+
+  <div id="helpModal" class="modal hidden">
+    <div class="modal-box">
+      <h2>Enigma – Kurzanleitung</h2>
+
+      <div class="help-text">
+        <h3>1. Walzen wählen</h3>
+        <p>Beispiel: II – V – I</p>
+
+        <h3>2. Umkehrwalze wählen</h3>
+        <p>Beispiel: UKW B</p>
+
+        <h3>3. Startstellung einstellen</h3>
+        <p>Beispiel: K L M</p>
+
+        <h3>4. Steckerbrett verbinden</h3>
+        <p>Beispiel: A↔M, E↔T, R↔Z</p>
+
+        <h3>5. Nachricht senden</h3>
+        <p>Eingeben:</p>
+        <p><strong>HALLO WELT</strong></p>
+
+        <p>Ergebnis:</p>
+        <p><strong>QFZMX KJTR</strong></p>
+
+        <h3>6. Entschlüsseln</h3>
+        <p>Mit exakt denselben Einstellungen erneut eingeben.</p>
+
+        <p><strong>Wichtig:</strong> Vor jeder neuen Nachricht die ursprüngliche Startstellung wieder einstellen.</p>
+      </div>
+
+      <button id="closeHelpBtn">OK</button>
+    </div>
+  </div>
 </main>
 
 <script src="app.js"></script>
